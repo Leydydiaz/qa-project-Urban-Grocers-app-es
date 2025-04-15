@@ -1,8 +1,4 @@
-import unittest
-from sender_stand_request import *
-
-class TestCreateKitNameKit(unittest.TestCase):
-    def test_create_kit_name_one_character(self):
+   def test_create_kit_name_one_character(self):
         kit_body = {"name": "a"}
         response = post_new_client_kit(kit_body)
         self.assertEqual(response.status_code, 201)
