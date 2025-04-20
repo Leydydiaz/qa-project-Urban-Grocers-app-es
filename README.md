@@ -28,8 +28,12 @@ Ejecución de pruebas:
 
 pytest
 
+Esto ejecutará todas las pruebas definidas en el proyecto.
+
 Archivos importantes:
+
 - configuration.py: archivo de configuración del proyecto
 - data.py: archivo de datos del proyecto
 - sender_stand_request.py: archivo de solicitudes de API
 - create_kit_name_kit_test.py: archivo de pruebas
+- README.md: este archivo
