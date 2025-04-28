@@ -1,71 +1,60 @@
 import unittest
-from sender_stand_request import post_new_client_kit
-from data import (
-    one_letter,
-    max_characters,
-    special_characters,
-    spaces_in_name,
-    numbers_in_name,
-    empty_name,
-    exceeds_max_characters,
-    missing_name_field,
-    different_type_name
-)
+import data
+import sender_stand_request
 
 class TestCreateKitNameKit(unittest.TestCase):
-    # Pruebas positivas
 
+    # Pruebas POSITIVAS
     def test_create_kit_name_one_character(self):
-        kit_body = {"name": one_letter}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.one_letter)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["name"], kit_body["name"])
+        self.assertEqual(response.json()["name"], data.one_letter)
 
     def test_create_kit_name_max_characters(self):
-        kit_body = {"name": max_characters}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.max_characters)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["name"], kit_body["name"])
+        self.assertEqual(response.json()["name"], data.max_characters)
 
     def test_create_kit_name_special_characters(self):
-        kit_body = {"name": special_characters}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.special_characters)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["name"], kit_body["name"])
+        self.assertEqual(response.json()["name"], data.special_characters)
 
     def test_create_kit_name_spaces(self):
-        kit_body = {"name": spaces_in_name}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.spaces_in_name)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["name"], kit_body["name"])
+        self.assertEqual(response.json()["name"], data.spaces_in_name)
 
     def test_create_kit_name_numbers(self):
-        kit_body = {"name": numbers_in_name}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.numbers_in_name)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.json()["name"], kit_body["name"])
+        self.assertEqual(response.json()["name"], data.numbers_in_name)
 
-    # Pruebas negativas
-
+    # Pruebas NEGATIVAS
     def test_create_kit_name_empty_string(self):
-        kit_body = {"name": empty_name}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.empty_name)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 400)
 
     def test_create_kit_name_exceeds_max_characters(self):
-        kit_body = {"name": exceeds_max_characters}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.exceeds_max_characters)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 400)
 
-    def test_create_kit_name_missing_parameter(self):
-        kit_body = missing_name_field  # No "name" en el body
-        response = post_new_client_kit(kit_body)
+    def test_create_kit_name_missing_field(self):
+        response = sender_stand_request.post_new_kit(data.missing_name_field, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 400)
 
     def test_create_kit_name_different_type(self):
-        kit_body = {"name": different_type_name}
-        response = post_new_client_kit(kit_body)
+        kit_body = sender_stand_request.get_kit_body(data.different_type_name)
+        response = sender_stand_request.post_new_kit(kit_body, auth_token=data.user_body["firstName"])
         self.assertEqual(response.status_code, 400)
 
-if __name__ == '__main__':
+# Ejecutar las pruebas
+if __name__ == "__main__":
     unittest.main()
