@@ -1,26 +1,49 @@
-# data.py
+# Encabezados para las peticiones
+headers = {
+    "Content-Type": "application/json"
+}
 
-# Información básica de un usuario
+# Datos del usuario para creación
 user_body = {
     "firstName": "Max",
     "phone": "+10005553535",
     "address": "8042 Lancaster Ave. Hamburg, NY"
 }
 
-# Cabeceras (headers) para la solicitud HTTP
-headers = {
-    "Content-Type": "application/json"
-}
+# Auth token obtenido de Postman
+auth_token = "da2cd123-50f3-4a12-bcbd-380010063dc0"
 
+# -----------------------------
 # Variables para pruebas POSITIVAS
-one_letter = "a"
-max_characters = "A" * 511  # 511 caracteres
-special_characters = "№%@,"
-spaces_in_name = " A Aaa "
-numbers_in_name = "123"
+# -----------------------------
 
+# Nombre con un solo caracter
+one_letter = "a"
+
+# Nombre con 511 caracteres
+max_length_name = "a" * 511
+
+# Nombre con caracteres especiales
+special_characters = "№%@,"
+
+# Nombre con espacios
+spaces_name = " A Aaa "
+
+# Nombre compuesto solo por números
+numbers_name = "123"
+
+# -----------------------------
 # Variables para pruebas NEGATIVAS
+# -----------------------------
+
+# Nombre vacío
 empty_name = ""
-exceeds_max_characters = "A" * 512  # 512 caracteres
-missing_name_field = {}  # kit_body sin el campo name
-different_type_name = 123  # name no como string, sino número
+
+# Nombre con más de 511 caracteres (512)
+too_long_name = "a" * 512
+
+# Nombre con tipo de dato incorrecto (entero)
+different_type = 123
+
+# Kit sin campo "name"
+missing_name_field = {}
